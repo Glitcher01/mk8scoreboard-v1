@@ -5,8 +5,15 @@
 
 :root {
     --scale_factor: 35;
-    --board_width: calc(var(--scale_factor)*1vw);
+    --board_width:calc(var(--scale_factor)*1vw);
     --board_height:calc(var(--scale_factor)*0.2vh);
+    --checkerboard-size:calc(var(--board_height) * 0.4);
+    --scoreboard-color-dark: #0a0a0a;
+    --scoreboard-color-light: #202020;
+    --score-color-back: #202020;
+    --score-color-left:#de1b22;
+    --score-color-right:#3363ff;
+    --score-text-color: white;
     --font_factor: 1.125;
 }
 
@@ -28,13 +35,13 @@
     height: 150%;
     width: 150%;
     position: absolute;
-    background: #de1b22;
+    background: var(--score-color-left);
     z-index: -1;
     top: -25%;
     left: -25%;
 }
 
-#scoreboard-left {
+#scoreboard-left, #scoreboard-right {
     height: var(--board_height);
     width: var(--board_width);
     position: relative;
@@ -48,19 +55,10 @@
     height: 150%;
     width: 150%;
     position: absolute;
-    background: #3363ff;
+    background: var(--score-color-right);
     z-index: -1;
     top: -25%;
     left: -25%;
-}
-
-#scoreboard-right {
-    height: var(--board_height);
-    width: var(--board_width);
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
 }
 
 .team-score {
@@ -69,8 +67,8 @@
     height: 80%;
     width: 100%;
     top: 10%;
-    background: repeating-conic-gradient(#0a0a0a 0% 25%, #202020 0 50%) 0% / 20px 20px;
-    color: #ffffff;
+    background: repeating-conic-gradient(var(--scoreboard-color-dark) 0% 25%, var(--scoreboard-color-light) 0 50%) 0% / var(--checkerboard-size) var(--checkerboard-size);
+    color: var(--score-text-color);
     vertical-align: middle;
     align-items: center;
     text-align: center;
@@ -105,9 +103,16 @@
     max-width:10%;
     min-width: 10%;
     font-size: calc(var(--font_factor)*1.5rem);
-    background: white;
-    color: black;
+    background: var(--score-color-back);
     height: 100%;
+}
+
+#SL {
+    color: var(--score-color-left);
+}
+
+#SR {
+    color: var(--score-color-right);
 }
 
 #T1SW, #T2SW {
@@ -121,18 +126,13 @@
     max-width: 75px;
     padding-left: 1vw;
     padding-right: 1vw;
-    background-color: #202020;
+    background-color: #0a0a0a;
     justify-content: center;
     align-items: center;
     color: white;
     font-family: 'New Rodin';
     position: relative;
     display: flex;
-}
-
-#Crazy8-svg {
-    position: absolute;
-    max-height: 80%;
 }
 
 #info-container {
@@ -146,7 +146,6 @@
 #info-container > div {
     font-family: 'New Rodin';
     color: white;
-    background-color: #202020;
     font-size: calc(var(--font_factor)*0.6rem);
     white-space: nowrap;
     height: 50%;
