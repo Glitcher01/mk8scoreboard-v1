@@ -4,6 +4,10 @@
 }
 
 :root {
+    --min-w: 540px;
+}
+
+:root {
     --scale_factor: 35;
     --board_width:calc(var(--scale_factor)*1vw);
     --board_height:calc(var(--scale_factor)*0.2vh);
@@ -23,6 +27,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 1vh;
+    min-width: 540px;
 }
 
 #board-container-left, #board-container-right {
@@ -42,11 +47,9 @@
 }
 
 #scoreboard-left, #scoreboard-right {
+    display: inline-block;
     height: var(--board_height);
-    width: var(--board_width);
     position: relative;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 }
 
@@ -84,24 +87,23 @@
 
 .team-initials {
     font-size: calc(var(--font_factor)*.85rem);
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    min-width: fit-content;
     width: 5%;
 }
 
 .team-name {
     font-size: calc(var(--font_factor)*.95rem);
-    padding-left: 2.5%;
-    padding-right: 2.5%;
     width: 85%;
+    min-width: fit-content;
+    white-space: nowrap;
 }
 
 .score {
     display: flex;
     padding-left: 2.5%;
     padding-right: 2.5%;
-    max-width:10%;
-    min-width: 10%;
+    width: 10%;
+    min-width: fit-content;
     font-size: calc(var(--font_factor)*1.5rem);
     background: var(--score-color-back);
     height: 100%;
