@@ -1,13 +1,13 @@
 {
-  "T1Init": "LHS",
-  "T1Name": "Ragnarock Racers",
-  "T1Points": "12",
-  "T1Sets": "1",
-  "T2Init": "LHS",
-  "T2Name": "Valhalla Vroomers",
-  "T2Points": "110",
-  "T2Sets": "3",
-  "TotalSets": "3",
-  "SetNum": "1",
-  "RaceNum": "1"
+  "T1Init": "",
+  "T1Name": "",
+  "T1Points": "",
+  "T1Sets": "",
+  "T2Init": "",
+  "T2Name": "",
+  "T2Points": "",
+  "T2Sets": "",
+  "TotalSets": "",
+  "SetNum": "",
+  "RaceNum": ""
 }
