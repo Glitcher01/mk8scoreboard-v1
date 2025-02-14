@@ -4,10 +4,6 @@
 }
 
 :root {
-    --min-w: 540px;
-}
-
-:root {
     --scale_factor: 35;
     --board_width:calc(var(--scale_factor)*1vw);
     --board_height:calc(var(--scale_factor)*0.2vh);
@@ -22,12 +18,9 @@
 }
 
 .board-container {
-    margin: 0 auto;
     text-align: center;
     display: flex;
     justify-content: center;
-    padding-bottom: 1vh;
-    min-width: 540px;
 }
 
 #board-container-left, #board-container-right {
@@ -47,10 +40,11 @@
 }
 
 #scoreboard-left, #scoreboard-right {
-    display: inline-block;
+    width: var(--board_width);
     height: var(--board_height);
     position: relative;
     overflow: hidden;
+    display: flex;
 }
 
 #scoreboard-right::before {
@@ -76,7 +70,7 @@
     align-items: center;
     text-align: center;
     font-family: 'New Rodin';
-    font-size: calc(var(--font_factor)*2rem);
+    font-size: calc(var(--board_height) * 0.8);
 }
 
 .team-score > * {
@@ -86,25 +80,27 @@
 }
 
 .team-initials {
-    font-size: calc(var(--font_factor)*.85rem);
+    margin: 0 5px 0 5px;
+    font-size: 0.6em;
     min-width: fit-content;
     width: 5%;
 }
 
 .team-name {
-    font-size: calc(var(--font_factor)*.95rem);
-    width: 85%;
-    min-width: fit-content;
-    white-space: nowrap;
+    margin: 0 5px 0 5px;
+    font-size: 0.4em;
+    word-wrap: break-word;
+    flex: 1;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .score {
     display: flex;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    padding: 0 5px 0 5px;
     width: 10%;
     min-width: fit-content;
-    font-size: calc(var(--font_factor)*1.5rem);
+    font-size: 0.75em;
     background: var(--score-color-back);
     height: 100%;
 }
@@ -122,12 +118,11 @@
     padding-top: 1vh;
 }
 
-#center-logo {
+#info-container {
+    flex-direction: column;
     height: var(--board_height);
-    width: calc(var(--board_width)/8);
+    width: 5vw;
     max-width: 75px;
-    padding-left: 1vw;
-    padding-right: 1vw;
     background-color: #0a0a0a;
     justify-content: center;
     align-items: center;
@@ -135,14 +130,6 @@
     font-family: 'New Rodin';
     position: relative;
     display: flex;
-}
-
-#info-container {
-    position: absolute;
-    width: 4vw;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 #info-container > div {
@@ -155,7 +142,7 @@
 
 .set-wins {
     height: 1vh;
-    width: var(--board_width);
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -173,4 +160,48 @@
 .fade {
     opacity: 0;
     transition: all 0.75s ease;
+}
+
+@media (min-width: 350px) and (max-width: 500px) {
+    .team-name {
+        flex-grow: 0;
+        width: 0px;
+        margin: 0;
+    }
+    .team-initials {
+        width: 50%;
+    }
+    .score {
+        width: 50%;
+    }
+    #info-container {
+        width: 0px;
+    }
+    #scoreboard-left, #scoreboard-right {
+        width: 200px;
+    }
+}
+
+@media (max-width: 350px) {
+    .team-name {
+        flex-grow: 0;
+        width: 0;
+        margin: 0;
+    }
+    .team-initials {
+        min-width: 0%;
+        width: 0px;
+        overflow: hidden;
+        margin: 0;
+    }
+    .score {
+        width: 100%;
+    }
+
+    #info-container {
+        width: 0px;
+    }
+    #scoreboard-left, #scoreboard-right {
+        width: 150px;
+    }
 }
