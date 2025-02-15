@@ -8,13 +8,6 @@
     --board_width:calc(var(--scale_factor)*1vw);
     --board_height:calc(var(--scale_factor)*0.2vh);
     --checkerboard-size:calc(var(--board_height) * 0.4);
-    --scoreboard-color-dark: #0a0a0a;
-    --scoreboard-color-light: #202020;
-    --score-color-back: #202020;
-    --score-color-left:#de1b22;
-    --score-color-right:#3363ff;
-    --score-text-color: white;
-    --font_factor: 1.125;
 }
 
 .board-container {
@@ -33,7 +26,7 @@
     height: 150%;
     width: 150%;
     position: absolute;
-    background: var(--score-color-left);
+    background: #de1b22;
     z-index: -1;
     top: -25%;
     left: -25%;
@@ -52,7 +45,7 @@
     height: 150%;
     width: 150%;
     position: absolute;
-    background: var(--score-color-right);
+    background: #3363ff;
     z-index: -1;
     top: -25%;
     left: -25%;
@@ -64,8 +57,8 @@
     height: 80%;
     width: 100%;
     top: 10%;
-    background: repeating-conic-gradient(var(--scoreboard-color-dark) 0% 25%, var(--scoreboard-color-light) 0 50%) 0% / var(--checkerboard-size) var(--checkerboard-size);
-    color: var(--score-text-color);
+    background: repeating-conic-gradient(#0a0a0a 0% 25%, #202020 0 50%) 0% / var(--checkerboard-size) var(--checkerboard-size);
+    color: white;
     vertical-align: middle;
     align-items: center;
     text-align: center;
@@ -87,12 +80,14 @@
 }
 
 .team-name {
+    display: block;
     margin: 0 5px 0 5px;
     font-size: 0.4em;
-    word-wrap: break-word;
-    flex: 1;
-    justify-content: center;
+    text-align: center;
+    width: 100%;
     overflow: hidden;
+    word-break: break-all;
+    height: calc(var(--board_height) * 0.8 * 0.5);
 }
 
 .score {
@@ -101,16 +96,16 @@
     width: 10%;
     min-width: fit-content;
     font-size: 0.75em;
-    background: var(--score-color-back);
+    background: #202020;
     height: 100%;
 }
 
 #SL {
-    color: var(--score-color-left);
+    color: #de1b22;
 }
 
 #SR {
-    color: var(--score-color-right);
+    color: #3363ff;
 }
 
 #T1SW, #T2SW {
@@ -120,8 +115,9 @@
 
 #info-container {
     flex-direction: column;
-    height: var(--board_height);
-    width: 5vw;
+    height: calc(var(--board_height) * 0.8);
+    padding: calc(var(--board_height) * 0.1) 0 calc(var(--board_height) * 0.1) 0;
+    width: max-content;
     max-width: 75px;
     background-color: #0a0a0a;
     justify-content: center;
@@ -134,8 +130,7 @@
 
 #info-container > div {
     font-family: 'New Rodin';
-    color: white;
-    font-size: calc(var(--font_factor)*0.6rem);
+    font-size: calc(var(--board_height) * 0.6 * 0.5);
     white-space: nowrap;
     height: 50%;
 }
@@ -176,6 +171,7 @@
     }
     #info-container {
         width: 0px;
+        color: transparent;
     }
     #scoreboard-left, #scoreboard-right {
         width: 200px;
@@ -200,6 +196,7 @@
 
     #info-container {
         width: 0px;
+        color: transparent;
     }
     #scoreboard-left, #scoreboard-right {
         width: 150px;

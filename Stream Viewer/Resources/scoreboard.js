@@ -203,9 +203,7 @@ function updateInfo(matchInfo) {
     match_info[0] = parseInt(matchInfo[0]) == NaN ? 0 : parseInt(matchInfo[0]);
     match_info[1] = parseInt(matchInfo[1]) == NaN ? 0 : parseInt(matchInfo[1]);
     document.getElementById('set-num').textContent = 'Set ' + match_info[0];
-    fitText('set-num');
     document.getElementById('race-num').textContent = 'Race ' + match_info[1];
-    fitText('race-num');
 }
 
 // Fixes font size to fit inside.
