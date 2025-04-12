@@ -170,7 +170,9 @@
         width: 50%;
     }
     #info-container {
-        width: 0px;
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
         color: transparent;
     }
     #scoreboard-left, #scoreboard-right {

@@ -1,13 +1,13 @@
 {
   "T1Init": "",
   "T1Name": "",
-  "T1Points": "",
+  "T1Points": "0",
   "T1Sets": "",
   "T2Init": "",
   "T2Name": "",
-  "T2Points": "",
+  "T2Points": "0",
   "T2Sets": "",
-  "TotalSets": "",
-  "SetNum": "",
-  "RaceNum": ""
+  "TotalSets": "3",
+  "SetNum": "8",
+  "RaceNum": "19"
 }

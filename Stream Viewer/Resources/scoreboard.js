@@ -188,15 +188,6 @@ function updateSets(scInfo) {
             document.getElementById('T2SW').innerHTML += TS2 + "\'></div>";
         }
     }
-    // if (t1_data[0] >= setsRequired && t2_data[0] < setsRequired) {
-    //     document.getElementById('Crazy8').style.fill = '#de1b22';
-    // }
-    // else if(t2_data[0] >= setsRequired && t1_data[0] < setsRequired) {
-    //     document.getElementById('Crazy8').style.fill = '#3363ff';
-    // }
-    // else {
-    //     document.getElementById('Crazy8').style.fill = '#ffffff';
-    // }
 }
 
 function updateInfo(matchInfo) {
@@ -204,42 +195,4 @@ function updateInfo(matchInfo) {
     match_info[1] = parseInt(matchInfo[1]) == NaN ? 0 : parseInt(matchInfo[1]);
     document.getElementById('set-num').textContent = 'Set ' + match_info[0];
     document.getElementById('race-num').textContent = 'Race ' + match_info[1];
-}
-
-// Fixes font size to fit inside.
-function fitText(element) {
-     // max font size in pixels
-     const maxFontSize = 50;
-     // get the DOM output element by its selector
-     let outputDiv = document.getElementById(element);
-     // get element's width & height
-     let width = outputDiv.clientWidth;
-     let height = outputDiv.clientHeight;
-     // get content's width
-     let contentWidth = outputDiv.scrollWidth;
-     let contentHeight = outputDiv.scrollHeight;
-     // get fontSize
-     let fontSize = parseInt(window.getComputedStyle(outputDiv).getPropertyValue('font-size'));
-     // if content's width is bigger then elements width - overflow
-     if (contentWidth > width || contentHeight > height){
-         fontSize = Math.min(Math.ceil(fontSize * width/contentWidth), Math.ceil(fontSize * height/contentHeight));
-         fontSize =  fontSize > maxFontSize  ? fontSize = maxFontSize  : fontSize - 1;
-         outputDiv.style.fontSize = fontSize+'px';
-         console.log([width, contentWidth, height, contentHeight, fontSize]);
-     }else{
-         // content is smaller then width... let's resize in 1 px until it fits 
-         while (contentWidth === width && contentHeight === height && fontSize < maxFontSize){
-             fontSize = Math.ceil(fontSize) + 1;
-             fontSize = fontSize > maxFontSize  ? fontSize = maxFontSize  : fontSize;
-             outputDiv.style.fontSize = fontSize+'px';   
-             // update widths
-             width = outputDiv.clientWidth;
-             contentWidth = outputDiv.scrollWidth;
-             height = outputDiv.clientHeight;
-             contentHeight = outputDiv.scrollHeight;
-             if (contentWidth > width || contentHeight > height){
-                 outputDiv.style.fontSize = fontSize-1+'px'; 
-             }
-         }
-     }
 }
