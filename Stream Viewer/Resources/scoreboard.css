@@ -171,8 +171,6 @@
     }
     #info-container {
         width: auto;
-        padding-left: 1vw;
-        padding-right: 1vw;
         color: transparent;
     }
     #scoreboard-left, #scoreboard-right {

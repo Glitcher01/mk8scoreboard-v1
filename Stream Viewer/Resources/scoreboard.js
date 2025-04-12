@@ -32,7 +32,7 @@ function getInfo() {
 	//i would gladly have used fetch, but OBS local files wont support that :(
 }
 
-function changeValue(element, value, startup) {
+function changeValue(element, value) {
     let color = element.style.color;
     element.classList.add('text-fade');
     setTimeout(() => {
@@ -40,9 +40,10 @@ function changeValue(element, value, startup) {
         element.classList.remove('text-fade');
         element.classList.add('show');
         element.style.color = color;
-      }, 500);
+      }, 750);
     element.classList.remove('show');
 }
+
 //Not sure if this needs to be async, Leaving the way it is for now
 async function getData(scInfo) {
     let T1Init = document.getElementById('IL');
@@ -52,9 +53,6 @@ async function getData(scInfo) {
     let T2Init = document.getElementById('IR');
     let T2Name = document.getElementById('NR');
     let T2Points = document.getElementById('SR');
-
-    let setNum = document.getElementById('set-num');
-    let raceNum = document.getElementById('race-num');
     if (startup) {
         T1Init.textContent = scInfo['T1Init'];
         T1Name.textContent = scInfo['T1Name'];
@@ -117,60 +115,18 @@ async function updateScore(score, duration, element) {
 
 function updateSets(scInfo) {
     setsRequired = scInfo[0];
-    if (parseInt(scInfo[1]) == NaN) {
-        t1_data[0] = 0;
-    }
-    else {
-        t1_data[0] = scInfo[1];
-    }
-    if (parseInt(scInfo[2]) == NaN) {
-        t2_data[0] = 0;
-    }
-    else {
-        t2_data[0] = scInfo[2];
-    }
+    t1_data = parseInt(scInfo[1]) == NaN ? 0 : scInfo[1];
+    t2_data = parseInt(scInfo[2]) == NaN ? 0 : scInfo[2];
     let set_multiplier = 1; // determines size of visible sets
     if (setsRequired > 1) {
         set_multiplier = 0.95;
     }
-    if (document.getElementById('T1SW').childElementCount == setsRequired && document.getElementById('T2SW').childElementCount == setsRequired) {
-        for(let i = 0; i < setsRequired; i++) {
-            let T1SNum = document.getElementById('T1S' + i);
-            let T2SNum = document.getElementById('T2S' + i);
-            if (i < t1_data[0] && T1SNum.style.backgroundColor == 'transparent') {
-                T1SNum.classList.add('fade');
-                setTimeout(() => {
-                    T1SNum.style.backgroundColor = '#de1b22';
-                    T1SNum.classList.remove('fade');
-                    T1SNum.classList.add('show');
-                }, 500);
-                T1SNum.classList.remove('show');
-            }
-            else if (i >= t1_data[0] && T1SNum.style.backgroundColor != 'transparent') {
-                T1SNum.classList.add('fade');
-                T1SNum.style.backgroundColor = 'transparent';
-                T1SNum.classList.remove('fade');
-            }
-            if (i > setsRequired - t2_data[0] - 1 && T2SNum.style.backgroundColor == 'transparent') {
-                T2SNum.classList.add('fade');
-                setTimeout(() => {
-                    T2SNum.style.backgroundColor = '#3363ff';
-                    T2SNum.classList.remove('fade');
-                    T2SNum.classList.add('show');
-                }, 500);
-                T2SNum.classList.remove('show');
-            }
-            else if (i <= setsRequired - t2_data[0] - 1 && T2SNum.style.backgroundColor != 'transparent') {
-                T2SNum.classList.add('fade');
-                T2SNum.style.backgroundColor = 'transparent';
-                T2SNum.classList.remove('fade');
-            }
-        }
-    }
-    else {
+    // If # of set boxes isn't equal to sets required to win, resize shapes.
+    if (document.getElementById('T1SW').childElementCount != setsRequired || document.getElementById('T2SW').childElementCount != setsRequired) {
         document.getElementById('T1SW').innerHTML = '';
         document.getElementById('T2SW').innerHTML = '';
         for (let i = 0; i < setsRequired; i++) {
+            // Create divs for representing set wins
             let TS1 = "<div id=\'T1S" + (i) + "\'style=\'width:calc(" + Math.abs(set_multiplier) + "* var(--board_width) / " + (setsRequired) + "); border-radius: 0.5vh; ";
             let TS2= "<div id=\'T2S" + (i) + "\'style=\'width:calc("+ Math.abs(set_multiplier) +" * var(--board_width) / " + (setsRequired) + "); border-radius: 0.5vh; ";
             if (i < setsRequired - 1) {
@@ -186,6 +142,38 @@ function updateSets(scInfo) {
             }
             document.getElementById('T1SW').innerHTML += TS1 + "\'></div>";
             document.getElementById('T2SW').innerHTML += TS2 + "\'></div>";
+        }
+    }
+    for(let i = 0; i < setsRequired; i++) {
+        let T1SNum = document.getElementById('T1S' + i);
+        let T2SNum = document.getElementById('T2S' + i);
+        if (i < t1_data[0] && T1SNum.style.backgroundColor == 'transparent') {
+            T1SNum.classList.add('fade');
+            setTimeout(() => {
+                T1SNum.style.backgroundColor = '#de1b22';
+                T1SNum.classList.remove('fade');
+                T1SNum.classList.add('show');
+            }, 500);
+            T1SNum.classList.remove('show');
+        }
+        else if (i >= t1_data[0] && T1SNum.style.backgroundColor != 'transparent') {
+            T1SNum.classList.add('fade');
+            T1SNum.style.backgroundColor = 'transparent';
+            T1SNum.classList.remove('fade');
+        }
+        if (i > setsRequired - t2_data[0] - 1 && T2SNum.style.backgroundColor == 'transparent') {
+            T2SNum.classList.add('fade');
+            setTimeout(() => {
+                T2SNum.style.backgroundColor = '#3363ff';
+                T2SNum.classList.remove('fade');
+                T2SNum.classList.add('show');
+            }, 500);
+            T2SNum.classList.remove('show');
+        }
+        else if (i <= setsRequired - t2_data[0] - 1 && T2SNum.style.backgroundColor != 'transparent') {
+            T2SNum.classList.add('fade');
+            T2SNum.style.backgroundColor = 'transparent';
+            T2SNum.classList.remove('fade');
         }
     }
 }
